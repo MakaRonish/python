@@ -71,13 +71,71 @@ def decrypt(message,shift_number):
 def process_file():
     file=input("Enter the file name:")
     mode=input("E for encrypt and D for decrypt:")
-    if file.lower()=='ronish.txt':
-        with open('ronish.txt') as my_file:
-            print(my_file.read())
+    return file,mode
+
+def is_file(file):
+    while True:
+        try:
+             f= open(file)
+
+        except FileNotFoundError:
+            print("file not found")
+
+        else:
+            print(f.read())
+            break
+
+    return f
+
+def fromfile(file,mode):
+    shift_number =shift()
+    with open(file,'r') as file1:
+        filetxt=file1.read()
+        if mode =='e':
+            ftext=encrypt(message,shift_number)
+        elif mode=='d':
+            ftext=decrypt(message,shift_number)
+        return ftext
+
+def message_or_file():
+    source = input("Would you like to read from file (f) or the console (c)? ").lower()
+    while source not in ["f", "c"]:
+        print("Invalid Option")
+        source = input("Would you like to read from file (f) or the console (c)? ").lower()
+    return source.lower()
 
 
 
-decrypt(message,shift_number)
+def dashboard():
+    print("Hello there\nWelcome to encrypt and decrypt text")
+
+def main():
+    dashboard()
+    while True:
+        file=message_or_file()
+        message,mode=enter_message()
+        if file=="f":
+            file,mode=process_file()
+            f=is_file()
+            file,mode=fromfile()
+        else:
+            message,mode=enter_message()
+            shift_number=shift()
+            if mode=='e':
+                encrypt()
+            elif mode=="d":
+                decrypt()
+
+
+main()
+
+
+
+
+
+
+
+
 
 
 
