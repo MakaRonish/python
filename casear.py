@@ -91,6 +91,34 @@ def dashboard():
 main()
 
 
+def file():
+    while True:
+        to_read=input('Enter the file name:')
+        Mode=input("E for encrypt D for decrypt:")
+
+        if Mode.upper()=="E":
+            with open(to_read,"w") as f:
+                wri=input("what do you want to write:")
+                f.write(wri)
+                x=f.read()
+            break
+        elif Mode.upper()=="D":
+            with open(to_read,"w") as f:
+                wri=input("what do you want to write:")
+                f.write(wri)
+                x=f.read()
+            break
+        else:
+            print('Enter a valid mode')
+            Mode = input("Encrypt(E) and decrypt(D):")
+        return x, Mode
+
+def console():
+    con=input("do you want to read from a file or not?")
+    return con
+
+
+
 #
 # def process_file():
 #     file=input("Enter the file name:")
