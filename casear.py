@@ -65,30 +65,12 @@ def decrypt(message,shift_number):
         decrypt_text+=i
     print(decrypt_text)
 
-def main():
-    dashboard()
-    message,Mode=enter_message()
-    shift_number=shift(Mode,message)
-    if Mode.lower()=='e':
-        encrypt(message, shift_number)
-    elif Mode.lower()=='d':
-        decrypt(message,shift_number)
-    cont=input("do you want to end or continue this y to continue:")
-    while cont.lower()=='y':
-        l.clear()
-        y.clear()
-        message, Mode = enter_message()
-        shift_number = shift(Mode, message)
-        if Mode.lower() == 'e':
-            encrypt(message, shift_number)
-        elif Mode.lower() == 'd':
-            decrypt(message, shift_number)
-        cont = input("do you want to end or continue this y to continue:")
+
 
 def dashboard():
     print("Hello there\nWelcome to encrypt and decrypt text")
 
-main()
+
 
 
 def file():
@@ -97,88 +79,58 @@ def file():
         Mode=input("E for encrypt D for decrypt:")
 
         if Mode.upper()=="E":
-            with open(to_read,"w") as f:
+            open(to_read,"w").close()
+            with open(to_read,"a") as f:
                 wri=input("what do you want to write:")
                 f.write(wri)
+            with open(to_read,"r") as f:
                 x=f.read()
+                shift_number=shift(Mode,x)
+                encrypt(x,shift_number)
             break
         elif Mode.upper()=="D":
-            with open(to_read,"w") as f:
+            open(to_read,"w").close()
+            with open(to_read,"a") as f:
                 wri=input("what do you want to write:")
                 f.write(wri)
+            with open(to_read,"r") as f:
                 x=f.read()
+                shift_number=shift(Mode,x)
+                decrypt(x,shift_number)
             break
         else:
             print('Enter a valid mode')
             Mode = input("Encrypt(E) and decrypt(D):")
         return x, Mode
 
-def console():
-    con=input("do you want to read from a file or not?")
-    return con
+def main():
+    dashboard()
+    console=input("Do you want to use the console or read from file(f for file):")
+    if console=='f':
+        file()
+    else:
+        message,Mode=enter_message()
+        shift_number=shift(Mode,message)
+        if Mode.lower()=='e':
+            encrypt(message, shift_number)
+        elif Mode.lower()=='d':
+            decrypt(message,shift_number)
+        cont=input("do you want to end or continue this y to continue:")
+        while cont.lower()=='y':
+            l.clear()
+            y.clear()
+            message, Mode = enter_message()
+            shift_number = shift(Mode, message)
+            if Mode.lower() == 'e':
+                encrypt(message, shift_number)
+            elif Mode.lower() == 'd':
+                decrypt(message, shift_number)
+            cont = input("do you want to end or continue this y to continue:")
+
+main()
 
 
 
-#
-# def process_file():
-#     file=input("Enter the file name:")
-#     mode=input("E for encrypt and D for decrypt:")
-#     return file,mode
-#
-# def is_file(file):
-#     while True:
-#         try:
-#              f= open(file)
-#
-#         except FileNotFoundError:
-#             print("file not found")
-#
-#         else:
-#             print(f.read())
-#             break
-#
-#     return f
-#
-# def fromfile(file,mode):
-#     shift_number =shift()
-#     with open(file,'r') as file1:
-#         filetxt=file1.read()
-#         if mode =='e':
-#             ftext=encrypt(message,shift_number)
-#         elif mode=='d':
-#             ftext=decrypt(message,shift_number)
-#         return ftext
-#
-# def message_or_file():
-#     source = input("Would you like to read from file (f) or the console (c)? ").lower()
-#     while source not in ["f", "c"]:
-#         print("Invalid Option")
-#         source = input("Would you like to read from file (f) or the console (c)? ").lower()
-#     return source.lower()
-#
-#
-
-
-#
-# def main():
-#     dashboard()
-#     while True:
-#         file=message_or_file()
-#         message,mode=enter_message()
-#         if file=="f":
-#             file,mode=process_file()
-#             f=is_file()
-#             file,mode=fromfile()
-#         else:
-#             message,mode=enter_message()
-#             shift_number=shift()
-#             if mode=='e':
-#                 encrypt()
-#             elif mode=="d":
-#                 decrypt()
-#
-#
-# main()
 
 
 
